@@ -1,0 +1,9 @@
+html {
+	overflow-y: scroll;
+}
+
+body {
+	transition:
+		color 0.4s,
+		background-color 0.4s;
+}
