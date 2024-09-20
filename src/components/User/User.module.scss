@@ -1,0 +1,39 @@
+.root {
+	display: grid;
+	place-items: center;
+	max-width: 600px;
+	padding: 50px;
+	border-radius: 8px;
+	box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+	background: white;
+}
+
+.title {
+	font-size: 20px;
+	font-family: var(--secondary-font), serif;
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-bottom: 2rem;
+}
+
+.userRow {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px dashed var(--lightgray);
+}
+
+.userButtons {
+	display: flex;
+	gap: 5px;
+}
+
+

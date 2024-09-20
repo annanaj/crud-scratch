@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { RiDeleteBin5Line, RiEdit2Fill } from 'react-icons/ri';
+
+import styles from './User.module.scss';
+import './../../index.scss';
+
 import {
 	fetchUsers,
 	createUser,
@@ -15,7 +20,15 @@ interface User {
 export default function User() {
 	const [users, setUsers] = useState<User[]>([]);
 	const [newUser, setNewUser] = useState({ name: '', email: '' });
+	const [emailError, setEmailError] = useState('');
 	const [editingUser, setEditingUser] = useState<User | null>(null);
+	const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+
+	const handleEmailChange = (e: { target: { value: any } }) => {
+		setNewUser({ ...newUser, email: e.target.value });
+		// Clear the error if the user starts typing again
+		if (emailError) setEmailError('');
+	};
 
 	useEffect(() => {
 		fetchUsersData();
@@ -30,7 +43,14 @@ export default function User() {
 		}
 	};
 
-	const handleCreateUser = async () => {
+	const handleCreateUser = async (e: { preventDefault: () => void }) => {
+		e.preventDefault();
+
+		if (!emailRegex.test(newUser.email)) {
+			setEmailError('Invalid email');
+			return;
+		}
+
 		try {
 			await createUser(newUser);
 			fetchUsersData();
@@ -62,14 +82,13 @@ export default function User() {
 	};
 
 	return (
-		<div>
-			<h1>CRUD Users</h1>
+		<div className={styles.root}>
+			<h1 className={styles.title}>Users list</h1>
 
-			{/* Form pro přidání nového uživatele */}
-			<div>
+			<div className={styles.form}>
 				<input
 					type="text"
-					placeholder="Name"
+					placeholder="Full name"
 					value={newUser.name}
 					onChange={(e) =>
 						setNewUser({ ...newUser, name: e.target.value })
@@ -79,16 +98,16 @@ export default function User() {
 					type="email"
 					placeholder="Email"
 					value={newUser.email}
-					onChange={(e) =>
-						setNewUser({ ...newUser, email: e.target.value })
-					}
+					onChange={handleEmailChange}
 				/>
-				<button onClick={handleCreateUser}>Add User</button>
+				{emailError && <p className="error">{emailError}</p>}
+				<button type="submit" onClick={handleCreateUser}>
+					Add User
+				</button>
 			</div>
 
-			{/* Form pro editaci uživatele */}
 			{editingUser && (
-				<div>
+				<div className={styles.form}>
 					<input
 						type="text"
 						value={editingUser.name}
@@ -109,22 +128,36 @@ export default function User() {
 							})
 						}
 					/>
-					<button onClick={handleUpdateUser}>Update User</button>
-					<button onClick={() => setEditingUser(null)}>Cancel</button>
+					<div className={styles.userButtons}>
+						<button
+							className="buttonSecondary"
+							onClick={() => setEditingUser(null)}
+						>
+							Cancel
+						</button>
+						<button onClick={handleUpdateUser}>Update</button>
+					</div>
 				</div>
 			)}
 
-			{/* Zobrazení uživatelů */}
 			<ul>
 				{users.map((user) => (
-					<li key={user.id}>
+					<li className={styles.userRow} key={user.id}>
 						{user.name} - {user.email}
-						<button onClick={() => setEditingUser(user)}>
-							Edit
-						</button>
-						<button onClick={() => handleDeleteUser(user.id)}>
-							Delete
-						</button>
+						<div className={styles.userButtons}>
+							<button
+								className="buttonTransparent"
+								onClick={() => setEditingUser(user)}
+							>
+								<RiEdit2Fill />
+							</button>
+							<button
+								className="buttonTransparent"
+								onClick={() => handleDeleteUser(user.id)}
+							>
+								<RiDeleteBin5Line />
+							</button>
+						</div>
 					</li>
 				))}
 			</ul>

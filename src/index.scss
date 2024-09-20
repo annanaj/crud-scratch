@@ -1,0 +1,98 @@
+/*
+  Josh W Comeau reset
+*/
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+* {
+	margin: 0;
+}
+
+body {
+	line-height: 1.5;
+	font-size: 14px;
+	-webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+	display: block;
+	max-width: 100%;
+}
+
+input, button, textarea, select {
+	font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+	overflow-wrap: break-word;
+}
+
+:root {
+	--text: #000000;
+	--text-minor: #808080;
+	--page-bg: #dee0e9;
+	--lightgray: #dbd7d7;
+	--blue: #326696;
+	--primary-font: Roboto, sans-serif;
+	--secondary-font: Josefin Sans, serif;
+}
+
+html {
+	scroll-behavior: smooth;
+	color: var(--text);
+	background-color: var(--page-bg);
+}
+
+body {
+	font-family: var(--primary-font), sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	transition:
+		color 0.4s,
+		background-color 0.4s;
+}
+input {
+	font-size: 12px;
+}
+
+input:not(:placeholder-shown):invalid {
+	outline-color: red;
+}
+
+input:focus:invalid {
+	outline-color: orange;
+}
+
+button {
+	display: inline-block;
+	padding: 6px 16px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: var(--blue);
+	color: white;
+	font-weight: bold;
+	font-size: 12px;
+	text-align: center;
+}
+
+.buttonSecondary {
+	background-color: white;
+	color: var(--text-minor);
+	border: 1px solid var(--text-minor);
+}
+
+.buttonTransparent {
+	background-color: transparent;
+	color: black;
+	padding-inline: 6px;
+}
+
+.error {
+	margin-top: -5px;
+	font-size: 12px;
+	color: red;
+}
