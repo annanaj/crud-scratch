@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { RiDeleteBin5Line, RiEdit2Fill } from 'react-icons/ri';
 
-import styles from './User.module.scss';
+import styles from './UsersList.module.scss';
 import './../../index.scss';
 
 import {
@@ -11,17 +11,17 @@ import {
 	deleteUser,
 } from '../../services/api';
 
-interface User {
+interface UsersList {
 	id: number;
 	name: string;
 	email: string;
 }
 
-export default function User() {
-	const [users, setUsers] = useState<User[]>([]);
+export default function UsersList() {
+	const [users, setUsers] = useState<UsersList[]>([]);
 	const [newUser, setNewUser] = useState({ name: '', email: '' });
 	const [emailError, setEmailError] = useState('');
-	const [editingUser, setEditingUser] = useState<User | null>(null);
+	const [editingUser, setEditingUser] = useState<UsersList | null>(null);
 	const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 
 	const handleEmailChange = (e: { target: { value: any } }) => {
