@@ -86,22 +86,47 @@ export default function UsersList() {
 			<h1 className={styles.title}>Users list</h1>
 
 			<div className={styles.form}>
+				<label htmlFor="fullName" className="visually-hidden">
+					Full Name
+				</label>
 				<input
 					type="text"
+					id="fullName"
 					placeholder="Full name"
 					value={newUser.name}
 					onChange={(e) =>
 						setNewUser({ ...newUser, name: e.target.value })
 					}
+					aria-required="true"
+					aria-label="Full Name"
 				/>
+
+				<label htmlFor="email" className="visually-hidden">
+					Email
+				</label>
 				<input
 					type="email"
+					id="email"
 					placeholder="Email"
 					value={newUser.email}
 					onChange={handleEmailChange}
+					aria-required="true"
+					aria-invalid={!!emailError}
+					aria-describedby="emailError"
+					aria-label="Email Address"
 				/>
-				{emailError && <p className="error">{emailError}</p>}
-				<button type="submit" onClick={handleCreateUser}>
+
+				{emailError && (
+					<p id="emailError" className="error" role="alert">
+						{emailError}
+					</p>
+				)}
+
+				<button
+					type="submit"
+					onClick={handleCreateUser}
+					aria-label="Add User"
+				>
 					Add User
 				</button>
 			</div>
