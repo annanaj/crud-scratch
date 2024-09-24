@@ -1,19 +1,14 @@
 {
   "users": [
     {
-      "id": "d615",
-      "name": "Paulson Whey",
-      "email": "paul@yahoo.com"
-    },
-    {
-      "id": "7359",
-      "name": "Mike Brevenny",
-      "email": "brev@gmail.com"
-    },
-    {
       "id": "8905",
       "name": "Jann Mole",
       "email": "abc@tg.com"
+    },
+    {
+      "id": "d478",
+      "name": "User 1",
+      "email": "user@gmail.com"
     }
   ]
 }
