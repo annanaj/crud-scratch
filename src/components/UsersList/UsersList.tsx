@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { RiDeleteBin5Line, RiEdit2Fill } from 'react-icons/ri';
 
-import styles from './UsersList.module.scss';
-import './../../index.scss';
+import { Button } from '@/components/ui/button';
 
+import styles from './UsersList.module.scss';
 import {
 	fetchUsers,
 	createUser,
@@ -11,11 +11,11 @@ import {
 	deleteUser,
 } from '../../services/api';
 
-interface UsersList {
+type UsersList = {
 	id: number;
 	name: string;
 	email: string;
-}
+};
 
 export default function UsersList() {
 	const [users, setUsers] = useState<UsersList[]>([]);
@@ -24,9 +24,9 @@ export default function UsersList() {
 	const [editingUser, setEditingUser] = useState<UsersList | null>(null);
 	const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 
-	const handleEmailChange = (e: { target: { value: any } }) => {
+	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setNewUser({ ...newUser, email: e.target.value });
-		// Clear the error if the user starts typing again
+		// clear the error if the user starts typing again
 		if (emailError) setEmailError('');
 	};
 
@@ -43,7 +43,7 @@ export default function UsersList() {
 		}
 	};
 
-	const handleCreateUser = async (e: { preventDefault: () => void }) => {
+	const handleCreateUser = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		if (!emailRegex.test(newUser.email)) {
@@ -82,11 +82,10 @@ export default function UsersList() {
 	};
 
 	return (
-		<div className={styles.root}>
-			<h1 className={styles.title}>Users list</h1>
-
-			<div className={styles.form}>
-				<label htmlFor="fullName" className="visually-hidden">
+		<div className="card-container items-center">
+			<h2 className="title">Users list</h2>
+			<form className="form" onSubmit={handleCreateUser}>
+				<label htmlFor="fullName" className="visuallyHidden">
 					Full Name
 				</label>
 				<input
@@ -101,7 +100,7 @@ export default function UsersList() {
 					aria-label="Full Name"
 				/>
 
-				<label htmlFor="email" className="visually-hidden">
+				<label htmlFor="email" className="visuallyHidden">
 					Email
 				</label>
 				<input
@@ -114,6 +113,7 @@ export default function UsersList() {
 					aria-invalid={!!emailError}
 					aria-describedby="emailError"
 					aria-label="Email Address"
+					required
 				/>
 
 				{emailError && (
@@ -122,14 +122,10 @@ export default function UsersList() {
 					</p>
 				)}
 
-				<button
-					type="submit"
-					onClick={handleCreateUser}
-					aria-label="Add User"
-				>
+				<Button type="submit" aria-label="Add User">
 					Add User
-				</button>
-			</div>
+				</Button>
+			</form>
 
 			{editingUser && (
 				<div className={styles.form}>
@@ -165,7 +161,7 @@ export default function UsersList() {
 				</div>
 			)}
 
-			<ul>
+			<ul className={styles.usersList}>
 				{users.map((user) => (
 					<li className={styles.userRow} key={user.id}>
 						{user.name} - {user.email}

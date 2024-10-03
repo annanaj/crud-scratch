@@ -5,10 +5,10 @@ const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 
-// povolení uplně všech CORS požadavků
+// povolení uplně všech CORS požadavků bez specifikace
 server.use(cors());
 
-// pouziti default middlewares
+// pouziti middleware
 server.use(middlewares);
 
 // pouziti routeru

@@ -15,7 +15,7 @@ describe('UsersList Component', () => {
 
 		// Check for form elements
 		expect(screen.getByPlaceholderText('Full name')).toBeInTheDocument();
-		expect(screen.getByPlaceholderText('Email')).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('EmailForm')).toBeInTheDocument();
 		expect(
 			screen.getByRole('button', { name: /Add User/i })
 		).toBeInTheDocument();

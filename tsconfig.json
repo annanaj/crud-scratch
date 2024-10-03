@@ -1,4 +1,11 @@
 {
+	/* For shadcn: */
+	"files": [],
+	"references": [
+		{
+			"path": "./tsconfig.app.json"
+		}
+	],
 	"compilerOptions": {
 		/* Base Options: */
 		"esModuleInterop": true,
@@ -17,7 +24,7 @@
 
 		/* If transpiling with TypeScript: */
 		"module": "esnext",
-		"moduleResolution": "node",
+		"moduleResolution": "node16",
 		"outDir": "dist",
 		"sourceMap": true,
 
@@ -30,7 +37,13 @@
 
 		/* If your code runs in the DOM: */
 		"lib": ["es2022", "dom", "dom.iterable"],
-		"jsx": "react"
+		"jsx": "react",
+
+		/* For shadcn: */
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		},
 	},
 }
 
