@@ -83,7 +83,7 @@ export default function UsersList() {
 
 	return (
 		<div className="card-container items-center">
-			<h2 className="title">Users list</h2>
+			<h2 className="title">Add some users</h2>
 			<form className="form" onSubmit={handleCreateUser}>
 				<label htmlFor="fullName" className="visuallyHidden">
 					Full Name

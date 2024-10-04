@@ -32,7 +32,7 @@ export default function EmailForm() {
 
 	return (
 		<div className="card-container items-center">
-			<h2 className="title">Sending an email</h2>
+			<h2 className="title">Send the email</h2>
 			<form onSubmit={sendEmail} className="form">
 				<label htmlFor="emailSent" className="visuallyHidden">
 					Email

@@ -50,7 +50,7 @@ export default function Player() {
 	return (
 		<>
 			<div className="card-container items-center">
-				<h2 className="title">Players</h2>
+				<h2 className="title">Listen & watch</h2>
 				<audio ref={audioRef} className={styles.media} controls>
 					<source src={Audio} type="audio/mpeg" />
 				</audio>

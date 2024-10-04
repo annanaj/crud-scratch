@@ -1,7 +1,9 @@
-import { GraphQLClient, gql } from 'graphql-request';
-import { Repository } from '../types/repository';
+// FIXME: connected with modules setting in TS config, but setup is ok
+import { gql, GraphQLClient } from 'graphql-request';
+import { Repository } from '@/types/repository';
 
-const GITHUB_TOKEN = process.env.VITE_PUBLIC_GITHUB_TOKEN;
+// FIXME: process.env deprecated, but TS doesnt recognize it..tsconfig ok
+const GITHUB_TOKEN = import.meta.env.VITE_PUBLIC_GITHUB_TOKEN;
 
 if (!GITHUB_TOKEN) {
 	throw new Error('GitHub token not found in environment variables');

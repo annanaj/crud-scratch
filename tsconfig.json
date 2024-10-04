@@ -13,7 +13,6 @@
 		"target": "es2022",
 		"allowJs": true,
 		"resolveJsonModule": true,
-		"moduleDetection": "force",
 		"isolatedModules": true,
 		"verbatimModuleSyntax": true,
 
@@ -23,8 +22,8 @@
 		"noImplicitOverride": true,
 
 		/* If transpiling with TypeScript: */
-		"module": "esnext",
-		"moduleResolution": "node16",
+		"module": "es2022",
+		"moduleResolution": "node",
 		"outDir": "dist",
 		"sourceMap": true,
 

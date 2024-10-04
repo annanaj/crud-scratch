@@ -51,7 +51,7 @@ export default function RepositoriesList({ owners }: RepositoriesProps) {
 				return (
 					<div key={owner} className="card-container items-start">
 						<a href={profileUrl} target="_blank" rel="noopener">
-							<div className="flex items-center gap-5">
+							<div className="flex items-center gap-5 mb-4">
 								<img
 									src={ownerData.avatarUrl}
 									alt={`${ownerData.login}'s avatar`}
@@ -64,7 +64,7 @@ export default function RepositoriesList({ owners }: RepositoriesProps) {
 								</h2>
 							</div>
 						</a>
-						{repos.slice(0, 3).map((repo) => (
+						{repos.slice(0, 2).map((repo) => (
 							<div key={repo.id} className="mb-4">
 								<h3 className="text-base font-semibold">
 									{repo.name}
