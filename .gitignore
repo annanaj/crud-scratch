@@ -5,7 +5,7 @@ yarn-error.log*
 node_modules
 dist-ssr
 *.local
-
+dist/
 .idea
 .DS_Store
 *.suo
@@ -13,3 +13,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Sentry Config File
+.env.sentry-build-plugin
