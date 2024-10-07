@@ -98,6 +98,7 @@ export default function UsersList() {
 					}
 					aria-required="true"
 					aria-label="Full Name"
+					required
 				/>
 
 				<label htmlFor="email" className="visuallyHidden">

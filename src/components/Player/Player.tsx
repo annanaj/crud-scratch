@@ -53,6 +53,7 @@ export default function Player() {
 				<h2 className="title">Listen & watch</h2>
 				<audio ref={audioRef} className={styles.media} controls>
 					<source src={Audio} type="audio/mpeg" />
+					Your browser does not support the audio tag.
 				</audio>
 				<Button onClick={handleAudioPlayPause}>
 					{isAudioPlaying ? 'Pause It' : 'Sound on'}
@@ -66,6 +67,7 @@ export default function Player() {
 					onMouseLeave={handleMouseLeave}
 				>
 					<source src={Video} type="video/mp4" />
+					Your browser does not support the video tag.
 				</video>
 				<Button onClick={handleVideoPlayPause}>
 					{isVideoPlaying ? 'Pause Video' : "Let's play"}
