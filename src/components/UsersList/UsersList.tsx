@@ -129,9 +129,13 @@ export default function UsersList() {
 			</form>
 
 			{editingUser && (
-				<div className={styles.form}>
+				<div className="form mt-4">
+					<label htmlFor="nameEdit" className="visuallyHidden">
+						Name
+					</label>
 					<input
 						type="text"
+						id="nameEdit"
 						value={editingUser.name}
 						onChange={(e) =>
 							setEditingUser({
@@ -140,8 +144,12 @@ export default function UsersList() {
 							})
 						}
 					/>
+					<label htmlFor="emailEdit" className="visuallyHidden">
+						Email
+					</label>
 					<input
 						type="email"
+						id="emailEdit"
 						value={editingUser.email}
 						onChange={(e) =>
 							setEditingUser({

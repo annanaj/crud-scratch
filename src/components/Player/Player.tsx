@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 
 import Audio from '/short_adventure.mp3';
-import Video from '/short_surf.mp4';
+import Video from '/short_video.mp4';
 
 import styles from './Player.module.scss';
 
@@ -61,6 +61,8 @@ export default function Player() {
 				<video
 					width="auto"
 					height="auto"
+					autoPlay
+					muted
 					ref={videoRef}
 					className={styles.media}
 					onMouseEnter={handleMouseEnter}
