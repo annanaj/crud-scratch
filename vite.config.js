@@ -2,12 +2,14 @@ import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { sentryVitePlugin } from '@sentry/vite-plugin';
+import EnvironmentPlugin from 'vite-plugin-environment';
 
 export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd(), '');
 	return {
 		plugins: [
 			react(),
+			EnvironmentPlugin('all'),
 			sentryVitePlugin({
 				authToken: process.env.SENTRY_AUTH_TOKEN,
 				org: 'annas-9u',
@@ -20,7 +22,7 @@ export default defineConfig(({ mode }) => {
 			},
 		},
 		build: {
-			sourcemap: true, // Source map generation must be turned on
+			sourcemap: true, // sentry - source map generation must be turned on
 		},
 		test: {
 			globals: true,
