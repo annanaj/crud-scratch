@@ -26,7 +26,6 @@ export default function UsersList() {
 
 	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setNewUser({ ...newUser, email: e.target.value });
-		// clear the error if the user starts typing again
 		if (emailError) setEmailError('');
 	};
 
@@ -45,12 +44,6 @@ export default function UsersList() {
 
 	const handleCreateUser = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
-		if (!emailRegex.test(newUser.email)) {
-			setEmailError('Invalid email');
-			return;
-		}
-
 		try {
 			await createUser(newUser);
 			fetchUsersData();
@@ -116,13 +109,6 @@ export default function UsersList() {
 					aria-label="Email Address"
 					required
 				/>
-
-				{emailError && (
-					<p id="emailError" className="error" role="alert">
-						{emailError}
-					</p>
-				)}
-
 				<Button type="submit" aria-label="Add User">
 					Add User
 				</Button>
