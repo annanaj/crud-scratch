@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 export default function EmailForm() {
 	const [email, setEmail] = useState('');
 	const [message, setMessage] = useState('');
+	const [isError, setIsError] = useState(false);
 	const [statusMessage, setStatusMessage] = useState('');
 
 	const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -19,14 +20,17 @@ export default function EmailForm() {
 
 			if (response.ok) {
 				setStatusMessage('Email sent successfully!');
+				setIsError(false);
 				setEmail('');
 				setMessage('');
 			} else {
 				setStatusMessage('Error while sending the email. Go fix it.');
+				setIsError(true);
 			}
 		} catch (error) {
 			console.error('Error:', error);
 			setStatusMessage('Error while sending the email. Go fix it.');
+			setIsError(true);
 		}
 	};
 
@@ -64,7 +68,9 @@ export default function EmailForm() {
 					Send email
 				</Button>
 			</form>
-			{statusMessage && <p className="success">{statusMessage}</p>}
+			{statusMessage && (
+				<p className={isError ? 'error' : 'success'}>{statusMessage}</p>
+			)}
 		</div>
 	);
 }

@@ -7,10 +7,18 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	flex-wrap: wrap;
 	gap: 10px;
 	margin-bottom: 10px;
 	border-bottom: 1px dashed var(--lightgray);
 }
+
+.userInfo {
+	max-width: 80%;
+	white-space: normal;
+	word-break: break-word;
+}
+
 
 .userButtons {
 	display: flex;

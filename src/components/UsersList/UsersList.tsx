@@ -20,18 +20,10 @@ type UsersList = {
 export default function UsersList() {
 	const [users, setUsers] = useState<UsersList[]>([]);
 	const [newUser, setNewUser] = useState({ name: '', email: '' });
+	const [nameError, setNameError] = useState('');
 	const [emailError, setEmailError] = useState('');
 	const [editingUser, setEditingUser] = useState<UsersList | null>(null);
 	const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-
-	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setNewUser({ ...newUser, email: e.target.value });
-		if (emailError) setEmailError('');
-	};
-
-	useEffect(() => {
-		fetchUsersData();
-	}, []);
 
 	const fetchUsersData = async () => {
 		try {
@@ -42,12 +34,48 @@ export default function UsersList() {
 		}
 	};
 
+	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newValue = e.target.value;
+		if (newValue.length < 3) {
+			setNameError('Name must be at least 3 characters long.');
+		} else if (newValue.length > 20) {
+			setNameError('Name must be less than 20 characters.');
+		} else {
+			setNameError('');
+			// Check if editingUser is not null before updating
+			if (editingUser) {
+				setEditingUser({
+					...editingUser,
+					name: newValue,
+				});
+			}
+		}
+	};
+
+	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newValue = e.target.value;
+		if (!emailRegex.test(newValue)) {
+			setEmailError('Please enter a valid email address.');
+		} else {
+			setEmailError('');
+			// Check if editingUser is not null before updating
+			if (editingUser) {
+				setEditingUser({
+					...editingUser,
+					email: newValue,
+				});
+			}
+		}
+	};
+
 	const handleCreateUser = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		try {
 			await createUser(newUser);
 			fetchUsersData();
 			setNewUser({ name: '', email: '' });
+			setNameError('');
+			setEmailError('');
 		} catch (error) {
 			console.error(error);
 		}
@@ -55,6 +83,23 @@ export default function UsersList() {
 
 	const handleUpdateUser = async () => {
 		if (editingUser) {
+			if (!editingUser.name || editingUser.name.trim().length < 3) {
+				setNameError('Name must be at least 3 characters long.');
+				return;
+			} else if (editingUser.name.length > 20) {
+				setNameError('Name must be less than 20 characters.');
+				return;
+			} else {
+				setNameError('');
+			}
+
+			if (!editingUser.email || !emailRegex.test(editingUser.email)) {
+				setEmailError('Please enter a valid email address.');
+				return;
+			} else {
+				setEmailError('');
+			}
+
 			try {
 				await updateUser(editingUser.id, editingUser);
 				fetchUsersData();
@@ -74,6 +119,10 @@ export default function UsersList() {
 		}
 	};
 
+	useEffect(() => {
+		fetchUsersData();
+	}, []);
+
 	return (
 		<div className="card-container items-center">
 			<h2 className="title">Add some users</h2>
@@ -89,6 +138,8 @@ export default function UsersList() {
 					onChange={(e) =>
 						setNewUser({ ...newUser, name: e.target.value })
 					}
+					minLength={3}
+					maxLength={20}
 					aria-required="true"
 					aria-label="Full Name"
 					required
@@ -102,7 +153,9 @@ export default function UsersList() {
 					id="email"
 					placeholder="Email"
 					value={newUser.email}
-					onChange={handleEmailChange}
+					onChange={(e) =>
+						setNewUser({ ...newUser, email: e.target.value })
+					}
 					aria-required="true"
 					aria-invalid={!!emailError}
 					aria-describedby="emailError"
@@ -122,32 +175,38 @@ export default function UsersList() {
 					<input
 						type="text"
 						id="nameEdit"
+						placeholder="Full name"
 						value={editingUser.name}
-						onChange={(e) =>
-							setEditingUser({
-								...editingUser,
-								name: e.target.value,
-							})
-						}
+						onChange={handleNameChange}
+						aria-required="true"
+						aria-label="Full Name"
 					/>
+					{nameError && <p className="error">{nameError}</p>}
+
 					<label htmlFor="emailEdit" className="visuallyHidden">
 						Email
 					</label>
 					<input
 						type="email"
 						id="emailEdit"
+						placeholder="Email"
 						value={editingUser.email}
-						onChange={(e) =>
-							setEditingUser({
-								...editingUser,
-								email: e.target.value,
-							})
-						}
+						onChange={handleEmailChange}
+						aria-required="true"
+						aria-invalid={!!emailError}
+						aria-describedby="emailError"
+						aria-label="Email Address"
 					/>
+					{emailError && <p className="erro">{emailError}</p>}
+
 					<div className={styles.userButtons}>
 						<button
 							className="buttonSecondary"
-							onClick={() => setEditingUser(null)}
+							onClick={() => {
+								setEditingUser(null);
+								setNameError('');
+								setEmailError('');
+							}}
 						>
 							Cancel
 						</button>
@@ -159,7 +218,9 @@ export default function UsersList() {
 			<ul className={styles.usersList}>
 				{users.map((user) => (
 					<li className={styles.userRow} key={user.id}>
-						{user.name} - {user.email}
+						<span className={styles.userInfo}>
+							{user.name} - {user.email}
+						</span>
 						<div className={styles.userButtons}>
 							<button
 								className="buttonTransparent"
