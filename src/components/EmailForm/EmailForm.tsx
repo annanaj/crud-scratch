@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Button } from '@/components/ui/button';
 
@@ -33,6 +33,16 @@ export default function EmailForm() {
 			setIsError(true);
 		}
 	};
+
+	useEffect(() => {
+		if (statusMessage) {
+			const timer = setTimeout(() => {
+				setStatusMessage('');
+			}, 3000);
+
+			return () => clearTimeout(timer);
+		}
+	}, [statusMessage]);
 
 	return (
 		<div className="card-container items-center">
