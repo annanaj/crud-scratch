@@ -74,12 +74,9 @@ export default function RepositoriesList({ owners }: RepositoriesProps) {
 									Updated at:{' '}
 									{new Date(repo.updatedAt).toLocaleString()}
 								</p>
+								<p>Stars: {repo.stargazerCount}</p>
 								<p>
-									<strong>Stars:</strong>{' '}
-									{repo.stargazerCount}
-								</p>
-								<p>
-									<strong>Primary Language:</strong>{' '}
+									Primary Language:{' '}
 									{repo.primaryLanguage?.name || 'N/A'}
 								</p>
 							</div>
