@@ -53,7 +53,7 @@ export default function RepositoriesList({ owners }: RepositoriesProps) {
 
 				return (
 					<div key={owner} className="card-container items-start">
-						<a href={profileUrl} target="_blank" rel="noopener">
+						<a href={profileUrl} target="_blank" rel="noreferrer">
 							<div className="flex items-center gap-5 mb-4">
 								<img
 									src={ownerData.avatarUrl}
