@@ -43,6 +43,9 @@
 		"paths": {
 			"@/*": ["./src/*"]
 		},
+
+		/* For svgr: */
+		"types": ["vite-plugin-svgr/client"]
 	},
 }
 

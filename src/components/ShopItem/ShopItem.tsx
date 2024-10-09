@@ -1,15 +1,13 @@
 import React from 'react';
-
+import SuperMario from '../svg/supermario.svg';
+import HomeIcon from '../svg/home.svg';
 import {
 	Card,
 	CardContent,
-	CardDescription,
 	CardFooter,
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card';
-
-import SuperMario from '../svg/SuperMario';
 import { Button } from '@/components/ui/button';
 
 export default function ShopItem() {
@@ -19,8 +17,9 @@ export default function ShopItem() {
 				<div className="rounded-lg overflow-hidden mb-4">
 					<SuperMario />
 				</div>
-				<CardTitle className="title title-left">
-					Switch Super Mario Bros. Wonder
+				<CardTitle className="title title-left flex gap-2">
+					<HomeIcon />
+					Switch Super Mario Bros.
 				</CardTitle>
 			</CardHeader>
 			<CardContent>
