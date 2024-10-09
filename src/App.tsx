@@ -14,9 +14,9 @@ export default function App() {
 	return (
 		<Sentry.ErrorBoundary>
 			<h1 className="title spacingTop font-black">Sandbox</h1>
-			<button className="mb-2 ml-2" onClick={() => methodDoesNotExist()}>
-				Break the world
-			</button>
+			{/*<button className="mb-2 ml-2" onClick={() => methodDoesNotExist()}>*/}
+			{/*	Break the world*/}
+			{/*</button>*/}
 			<div className="mainContainer">
 				<UsersList />
 				<EmailForm />

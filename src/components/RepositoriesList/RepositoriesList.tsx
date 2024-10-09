@@ -44,6 +44,9 @@ export default function RepositoriesList({ owners }: RepositoriesProps) {
 
 	return (
 		<div className="grid grid-cols-2 gap-5">
+			{/*<button className="mb-2 ml-2" onClick={() => methodDoesNotExist()}>*/}
+			{/*	Break the world*/}
+			{/*</button>*/}
 			{Object.entries(repositories).map(([owner, repos]) => {
 				const ownerData = repos[0]?.owner;
 				const profileUrl = `https://github.com/${ownerData.login}`; // construct profile URL
