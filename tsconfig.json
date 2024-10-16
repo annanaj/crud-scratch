@@ -24,7 +24,7 @@
 		/* If transpiling with TypeScript: */
 		"module": "es2022",
 		"moduleResolution": "node",
-		"outDir": "dist",
+		"outDir": "build",
 		"sourceMap": true,
 
 		/* AND if you're building for a library: */

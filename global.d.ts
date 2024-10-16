@@ -1,3 +1,5 @@
+declare module '*.jpg';
+declare module '*.json';
 declare module '*.module.css';
 declare module '*.module.scss';
 declare module '*.mp4' {
