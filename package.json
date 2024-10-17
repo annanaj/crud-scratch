@@ -1,5 +1,6 @@
 {
 	"name": "crud-scratch",
+	"homepage": "https://annanaj.github.io/crud",
 	"version": "1.0.0",
 	"type": "module",
 	"description": "just a simple scratch crud app",
@@ -7,6 +8,7 @@
 		"dev": "vite",
 		"start": "json-server --watch api/db.json --port 5001",
 		"predeploy": "npm run build",
+		"deploy": "gh-pages -d dist",
 		"build": "tsc && vite build",
 		"preview": "vite preview",
 		"tsc": "tsc",
