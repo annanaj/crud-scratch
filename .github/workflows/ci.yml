@@ -9,7 +9,7 @@ jobs:
 
         steps:
             - name: Checkout repo
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
 
 
             - name: Set up Node.js
@@ -18,16 +18,16 @@ jobs:
                   node-version: 18.x
 
             - name: Install dependencies
-              uses: bahmutov/npm-install@v1
+              uses: yarn install
 
             - name: TypeScript Check
-              run: npm run tsc
+              run: yarn tsc
 
             - name: Run Tests
-              run: npm run test
+              run: yarn test
 
             - name: Build project
-              run: npm run build
+              run: yarn build
               env:
                   EMAIL_USER: ${{ secrets.EMAIL_USER }}
                   EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
