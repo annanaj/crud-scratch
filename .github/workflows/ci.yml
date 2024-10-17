@@ -15,10 +15,12 @@ jobs:
             - name: Set up Node.js
               uses: actions/setup-node@v3
               with:
-                  node-version: 18.x
+                  node-version: 16.x
 
             - name: Install dependencies
-              uses: yarn install
+              uses: borales/actions-yarn@v4
+              with:
+                  cmd: install # will run `yarn install` command
 
             - name: TypeScript Check
               run: yarn tsc
@@ -27,7 +29,9 @@ jobs:
               run: yarn test
 
             - name: Build project
-              run: yarn build
+              run: borales/actions-yarn@v4
+              with:
+                  cmd: build # will run `yarn build` command
               env:
                   EMAIL_USER: ${{ secrets.EMAIL_USER }}
                   EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
