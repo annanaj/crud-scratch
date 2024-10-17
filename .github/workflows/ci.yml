@@ -1,0 +1,58 @@
+name: CI/CD Pipeline
+on:
+    push:
+        branches:
+            - main
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v2
+
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: 18.x
+
+            - name: Install dependencies
+              uses: bahmutov/npm-install@v1
+
+            - name: TypeScript Check
+              run: npm run tsc
+
+            - name: Run Tests
+              run: npm run test
+
+            - name: Build project
+              run: npm run build
+              env:
+                  EMAIL_USER: ${{ secrets.EMAIL_USER }}
+                  EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+                  VITE_PUBLIC_GITHUB_TOKEN: ${{ secrets.VITE_PUBLIC_GITHUB_TOKEN }}
+
+            - name: Upload production-ready build files
+              uses: actions/upload-artifact@v3
+              with:
+                  name: production-files
+                  path: ./dist
+    deploy:
+        name: Deploy
+        needs: build
+        runs-on: ubuntu-latest
+        if: github.ref == 'refs/heads/main'
+
+        steps:
+            -   name: Download artifact
+                uses: actions/download-artifact@v3
+                with:
+                    name: production-files
+                    path: ./dist
+
+            -   name: Deploy to GitHub Pages
+                uses: peaceiris/actions-gh-pages@v3
+                with:
+                    github_token: ${{ secrets.GITHUB_TOKEN }}
+                    publish_dir: ./dist
