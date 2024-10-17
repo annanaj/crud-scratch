@@ -29,9 +29,7 @@ jobs:
               run: yarn test
 
             - name: Build project
-              run: borales/actions-yarn@v4
-              with:
-                  cmd: build # will run `yarn build` command
+              run: yarn build
               env:
                   EMAIL_USER: ${{ secrets.EMAIL_USER }}
                   EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
